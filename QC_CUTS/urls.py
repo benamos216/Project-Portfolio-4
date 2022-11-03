@@ -20,4 +20,5 @@ from CUTS import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.get_supplier, name='get_supplier'),
+    path('add_supplier', views.add_supplier, name='add_supplier'),
 ]

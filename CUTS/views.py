@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Supplier
+from .forms import SupplierForm
 
 # Create your views here.
 
@@ -10,3 +11,15 @@ def get_supplier(request):
         'suppliers': suppliers
     }
     return render(request, "supplier.html", context)
+
+def add_supplier(request):
+    if request.method == "POST":
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = SupplierForm()
+    context = {
+        'form': form
+    }
+    return render(request, "add_supplier.html", context)
