@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Supplier
-from .forms import SupplierForm
+from .models import Supplier, Range
+from .forms import SupplierForm, RangeForm
 
 # Create your views here.
 
@@ -41,3 +41,11 @@ def delete_supplier(request, supplier_id):
     supplier = get_object_or_404(Supplier, id=supplier_id)
     supplier.delete()
     return redirect('get_supplier')
+
+def get_ranges(request, supplier_id):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    ranges = Range.objects.filter(supplier=supplier_id)
+    context = {
+        'ranges': ranges
+    }
+    return render(request, "ranges.html", context)
