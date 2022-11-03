@@ -1,0 +1,133 @@
+/* Main CSS for default Template */
+
+body {
+    background-color: rgb(218, 217, 38);
+    color: #343a3f;
+}
+
+nav {
+    background-color: #343a3f;
+}
+
+.navbar-brand, .nav-link {
+    color: white;
+    margin-left: 5%;
+}
+
+.navbar-brand:hover {
+    color:rgb(218, 217, 38);
+}
+
+.nav-link:hover {
+    color:rgb(218, 217, 38);
+}
+
+.form-inline {
+    margin-left:60%;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.btn-outline-success {
+    margin-left:5px;
+    color:rgb(218, 217, 38);
+    border:rgb(218, 217, 38) 1px solid;
+}
+
+button {
+    border-radius: 0.25rem;
+}
+
+.btn-outline-success:hover {
+    background-color:rgb(218, 217, 38);
+    border:rgb(218, 217, 38) 1px solid;
+}
+
+main {
+    height: 500px;
+}
+
+footer {
+    background-color: #343a3f;
+    text-align: center;
+    height: 200px;
+}
+
+.footer-break {
+    color: white;
+    width:80%;
+    margin-left: 10%;
+}
+
+.fa-brands, .fab {
+    font-size: xx-large;
+    padding: 10px;
+    color:rgb(218, 217, 38);
+}
+
+.copyright {
+    color: rgb(218, 217, 38);
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.copyright:hover {
+    color: white;
+}
+
+/* CSS for index page */
+
+.card {
+    background-color: #343a3f;
+}
+
+.card-text {
+    text-align: center;
+    float: auto;
+    color:white;
+    text-decoration: none;
+}
+
+.card-text:hover {
+    color: rgb(218, 217, 38);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete, .edit {
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #343a3f;
+    border:rgb(218, 217, 38) 1px solid;
+    color:rgb(218, 217, 38);
+}
+
+.delete:hover, .edit:hover {
+    background-color: rgb(218, 217, 38);
+    border:rgb(218, 217, 38) 1px solid;
+    color: white;
+}
+
+.main-button {
+    background-color: #343a3f;
+    border:white 1px solid;
+    color:white;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-button:hover {
+    background-color: white;
+    border:white 1px solid;
+    color: #343a3f;
+}
