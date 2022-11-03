@@ -23,3 +23,21 @@ def add_supplier(request):
         'form': form
     }
     return render(request, "add_supplier.html", context)
+
+def edit_supplier(request, supplier_id):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    if request.method == "POST":
+        form = SupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = SupplierForm(instance=supplier)
+    context = {
+        'form': form
+    }
+    return render(request, 'edit_supplier.html', context)
+
+def delete_supplier(request, supplier_id):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    supplier.delete()
+    return redirect('get_supplier')
