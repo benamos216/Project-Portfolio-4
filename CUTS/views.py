@@ -66,3 +66,23 @@ def add_range(request):
         'form': form
     }
     return render(request, "add_range.html", context)
+
+
+def edit_range(request, range_id):
+    ranges = get_object_or_404(Range, id=range_id)
+    if request.method == "POST":
+        form = RangeForm(request.POST, instance=ranges)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = RangeForm(instance=ranges)
+    context = {
+        'form': form
+    }
+    return render(request, 'edit_range.html', context)
+
+
+def delete_range(request, range_id):
+    ranges = get_object_or_404(Range, id=range_id)
+    ranges.delete()
+    return redirect('get_supplier')

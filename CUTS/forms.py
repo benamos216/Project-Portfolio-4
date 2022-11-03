@@ -11,4 +11,4 @@ class SupplierForm(forms.ModelForm):
 class RangeForm(forms.ModelForm):
     class Meta:
         model = Range
-        fields = ['ranges', 'supplier']
+        fields = ['supplier', 'ranges']
