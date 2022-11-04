@@ -27,4 +27,6 @@ urlpatterns = [
     path('add_range', views.add_range, name='add_range'),
     path('edit_range/<range_id>', views.edit_range, name='edit_range'),
     path('delete_range/<range_id>', views.delete_range, name='delete_range'),
+    path('get_rolls/<range_id>', views.get_rolls, name='get_rolls'),
+    path('add_roll', views.add_roll, name='add_roll'),
 ]
