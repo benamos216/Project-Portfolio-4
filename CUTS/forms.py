@@ -1,5 +1,5 @@
 from django import forms
-from .models import Supplier, Range, Roll
+from .models import Supplier, Range, Roll, Cut
 
 
 class SupplierForm(forms.ModelForm):
@@ -18,3 +18,9 @@ class RollForm(forms.ModelForm):
     class Meta:
         model = Roll
         fields = ['ranges', 'rolls', 'roll_width', 'roll_size', 'location']
+
+
+class CutForm(forms.ModelForm):
+    class Meta:
+        model = Cut
+        fields = ['invoice', 'cut_size', 'cut']

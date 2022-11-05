@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Supplier, Range, Roll
-from .forms import SupplierForm, RangeForm, RollForm
+from .models import Supplier, Range, Roll, Cut
+from .forms import SupplierForm, RangeForm, RollForm, CutForm
 
 # Create your views here.
 
@@ -97,7 +97,7 @@ def get_rolls(request, range_id):
     return render(request, "rolls.html", context)
 
 
-def add_roll(request):
+def addroll(request):
     if request.method == "POST":
         form = RollForm(request.POST)
         if form.is_valid():
@@ -108,3 +108,23 @@ def add_roll(request):
         'form': form
     }
     return render(request, "add_roll.html", context)
+
+
+def edit_roll(request, roll_id):
+    rolls = get_object_or_404(Roll, id=roll_id)
+    if request.method == "POST":
+        form = RollForm(request.POST, instance=rolls)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = RollForm(instance=rolls)
+    context = {
+        'form': form
+    }
+    return render(request, 'edit_roll.html', context)
+
+
+def delete_roll(request, roll_id):
+    rolls = get_object_or_404(Roll, id=roll_id)
+    rolls.delete()
+    return redirect('get_supplier')
