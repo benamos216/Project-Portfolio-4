@@ -31,7 +31,7 @@ class Cut (models.Model):
     rolls = models.ForeignKey('Roll', on_delete=models.CASCADE, related_name='Roll')
     invoice = models.CharField(max_length=10, null=False, blank=False)
     cut_size = models.DecimalField(max_digits=4, decimal_places=2, null=False, blank=False)
-    cut = models.BooleanField(null=False, blank=False, default=False)
+    cuts = models.BooleanField(null=False, blank=False, default=False)
 
     def __str__(self):
-        return self.cuts
+        return self.invoice

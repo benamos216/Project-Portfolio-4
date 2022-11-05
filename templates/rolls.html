@@ -11,9 +11,11 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-text">{{ rolls.rolls }} {{ rolls.roll_width }}</h2>
-                            <p class="card-text">{{ rolls.roll_size }}</p>
-                            <p class="card-text">{{ rolls.location }}</p>
+                            <a href="/getcuts/{{ rolls.id }}">
+                                <h2 class="roll-text">{{ rolls.rolls }} {{ rolls.roll_width }}</h2>
+                            </a>
+                            <p class="roll-text">{{ rolls.roll_size }}</p>
+                            <p class="roll-text">{{ rolls.location }}</p>
                         </div>
                         <div>
                             <span class="buttons">

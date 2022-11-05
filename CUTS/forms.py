@@ -23,4 +23,4 @@ class RollForm(forms.ModelForm):
 class CutForm(forms.ModelForm):
     class Meta:
         model = Cut
-        fields = ['invoice', 'cut_size', 'cut']
+        fields = ['rolls', 'invoice', 'cut_size', 'cuts']

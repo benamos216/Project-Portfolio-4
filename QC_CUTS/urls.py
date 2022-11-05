@@ -31,4 +31,6 @@ urlpatterns = [
     path('addroll', views.addroll, name='addroll'),
     path('edit_roll/<roll_id>', views.edit_roll, name='edit_roll'),
     path('delete_roll/<roll_id>', views.delete_roll, name='delete_roll'),
+    path('getcuts/<roll_id>', views.getcuts, name='getcuts'),
+    path('addcut', views.addcut, name='addcut')
 ]

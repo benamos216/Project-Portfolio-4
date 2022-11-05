@@ -128,3 +128,25 @@ def delete_roll(request, roll_id):
     rolls = get_object_or_404(Roll, id=roll_id)
     rolls.delete()
     return redirect('get_supplier')
+
+
+def getcuts(request, roll_id):
+    rolls = get_object_or_404(Roll, id=roll_id)
+    cuts = Cut.objects.filter(rolls=roll_id)
+    context = {
+        'cuts': cuts
+    }
+    return render(request, 'cut.html', context)
+
+
+def addcut(request):
+    if request.method == "POST":
+        form = CutForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = CutForm()
+    context = {
+        'form': form
+    }
+    return render(request, "add_cut.html", context)

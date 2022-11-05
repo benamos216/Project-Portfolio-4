@@ -93,6 +93,13 @@ footer {
     color: rgb(218, 217, 38);
 }
 
+.roll-text {
+    text-align: center;
+    float: auto;
+    color:white;
+    text-decoration: none;
+}
+
 .buttons {
     display: flex;
     justify-content: center;
@@ -108,7 +115,16 @@ footer {
     color:rgb(218, 217, 38);
 }
 
-.delete:hover, .edit:hover {
+.add {
+    float: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #343a3f;
+    border:rgb(218, 217, 38) 1px solid;
+    color:rgb(218, 217, 38);
+}
+
+.delete:hover, .edit:hover, .add:hover {
     background-color: rgb(218, 217, 38);
     border:rgb(218, 217, 38) 1px solid;
     color: white;

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Roll List -->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div>
+                                {% for cuts in cuts %}
+                                <p class="roll-text">{{ cuts.invoice }}</p>
+                                <p class="roll-text">{{ cuts.cut_size }}</p>
+                                <p class="roll-text">{{ cuts.cuts }}</p>
+                                {% endfor %}
+                            </div>
+                            <div>
+                                <a href="/addcut">
+                                    <button class="add">Add Cut</button>
+                                </a>
+                            </div>
+                            <div>
+                                <span class="buttons">
+                                    <a href="/delete_roll/{{ rolls.id }}">
+                                        <button class="delete">Delete</button>
+                                    </a>
+                                    <a href="/edit_roll/{{ rolls.id }}">
+                                        <button class="edit">Edit</button>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="center">
+            <a href="/addroll">
+                <button class="main-button">ADD ROLL</button>
+            </a>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% endblock content %}
