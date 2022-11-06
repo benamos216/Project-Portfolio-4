@@ -21,8 +21,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.get_supplier, name='get_supplier'),
     path('add_supplier', views.add_supplier, name='add_supplier'),
-    path('edit_supplier/<supplier_id>', views.edit_supplier, name='edit_supplier'),
-    path('delete_supplier/<supplier_id>', views.delete_supplier, name='delete_supplier'),
+    path(
+        'edit_supplier/<supplier_id>',
+        views.edit_supplier,
+        name='edit_supplier'
+        ),
+    path(
+        'delete_supplier/<supplier_id>',
+        views.delete_supplier,
+        name='delete_supplier'
+        ),
     path('get_ranges/<supplier_id>', views.get_ranges, name='get_ranges'),
     path('add_range', views.add_range, name='add_range'),
     path('edit_range/<range_id>', views.edit_range, name='edit_range'),
@@ -32,5 +40,8 @@ urlpatterns = [
     path('edit_roll/<roll_id>', views.edit_roll, name='edit_roll'),
     path('delete_roll/<roll_id>', views.delete_roll, name='delete_roll'),
     path('getcuts/<roll_id>', views.getcuts, name='getcuts'),
-    path('addcut', views.addcut, name='addcut')
+    path('addcut', views.addcut, name='addcut'),
+    path('edit_cut/<cut_id>', views.edit_cut, name='edit_cut'),
+    path('delete_cut/<cut_id>', views.delete_cut, name='delete_cut'),
+    path('toggle/<cut_id>', views.toggle_cut, name='toggle'),
 ]

@@ -14,8 +14,11 @@
                             <a href="/getcuts/{{ rolls.id }}">
                                 <h2 class="roll-text">{{ rolls.rolls }} {{ rolls.roll_width }}</h2>
                             </a>
-                            <p class="roll-text">{{ rolls.roll_size }}</p>
-                            <p class="roll-text">{{ rolls.location }}</p>
+                            <span class="roll-text">Roll Size: {{ rolls.roll_size }}</span>
+                            <br>
+                            <span class="roll-text">Warehouse Location: {{ rolls.location }}</span>
+                            <br>
+                            <span class="roll-text">Roll Balance left after cuts: </span>
                         </div>
                         <div>
                             <span class="buttons">

@@ -150,3 +150,30 @@ def addcut(request):
         'form': form
     }
     return render(request, "add_cut.html", context)
+
+
+def edit_cut(request, cut_id):
+    cuts = get_object_or_404(Cut, id=cut_id)
+    if request.method == "POST":
+        form = CutForm(request.POST, instance=cuts)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = CutForm(instance=cuts)
+    context = {
+        'form': form
+    }
+    return render(request, 'edit_cut.html', context)
+
+
+def delete_cut(request, cut_id):
+    cuts = get_object_or_404(Cut, id=cut_id)
+    cuts.delete()
+    return redirect('get_supplier')
+
+
+def toggle_cut(request, cut_id):
+    cuts = get_object_or_404(Cut, id=cut_id)
+    cuts.cuts = not cuts.cuts
+    cuts.save()
+    return redirect('get_supplier')

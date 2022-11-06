@@ -82,6 +82,12 @@ footer {
     background-color: #343a3f;
 }
 
+.card-cut {
+    background-color: #343a3f;
+    height: 240px;
+    border-radius: 1%;
+}
+
 .card-text {
     text-align: center;
     float: auto;
@@ -91,6 +97,15 @@ footer {
 
 .card-text:hover {
     color: rgb(218, 217, 38);
+}
+
+.cut-text {
+    text-align: center;
+    float: auto;
+    color:white;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 .roll-text {
@@ -110,18 +125,21 @@ footer {
     float: right;
     margin-right: 10px;
     margin-bottom: 10px;
+    margin-top: 10px;
     background-color: #343a3f;
     border:rgb(218, 217, 38) 1px solid;
     color:rgb(218, 217, 38);
 }
 
 .add {
-    float: center;
+    float: right;
     margin-right: 10px;
     margin-bottom: 10px;
     background-color: #343a3f;
     border:rgb(218, 217, 38) 1px solid;
     color:rgb(218, 217, 38);
+    justify-content: center;
+    align-items: center;
 }
 
 .delete:hover, .edit:hover, .add:hover {
