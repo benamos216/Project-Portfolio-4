@@ -5,50 +5,23 @@ body {
     color: #343a3f;
 }
 
-nav {
+.pos-f-t {
     background-color: #343a3f;
 }
 
-.navbar-brand, .nav-link {
-    color: white;
-    margin-left: 5%;
-}
-
-.navbar-brand:hover {
-    color:rgb(218, 217, 38);
-}
-
-.nav-link:hover {
-    color:rgb(218, 217, 38);
-}
-
-.form-inline {
-    margin-left:60%;
-    display: flex;
-    justify-content: right;
-    align-items: right;
-}
-
-.btn-outline-success {
-    margin-left:5px;
-    color:rgb(218, 217, 38);
-    border:rgb(218, 217, 38) 1px solid;
-}
-
-button {
-    border-radius: 0.25rem;
-}
-
-.btn-outline-success:hover {
-    background-color:rgb(218, 217, 38);
-    border:rgb(218, 217, 38) 1px solid;
+.navbar-toggler {
+    border-color:rgb(218, 217, 38);
 }
 
 main {
-    height: 500px;
+    height: 1500px;
 }
 
 footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     background-color: #343a3f;
     text-align: center;
     height: 200px;
@@ -76,7 +49,7 @@ footer {
     color: white;
 }
 
-/* CSS for index page */
+/* CSS for cards */
 
 .card {
     background-color: #343a3f;
@@ -84,7 +57,7 @@ footer {
 
 .card-cut {
     background-color: #343a3f;
-    height: 240px;
+    height: 200px;
     border-radius: 1%;
 }
 
@@ -115,10 +88,16 @@ footer {
     text-decoration: none;
 }
 
+/* CSS for buttons */
+
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button {
+    border-radius: 0.25rem;
 }
 
 .delete, .edit {
@@ -163,5 +142,15 @@ footer {
 .main-button:hover {
     background-color: white;
     border:white 1px solid;
+    color: #343a3f;
+}
+
+.cut {
+    background-color: rgb(218, 217, 38);
+}
+
+.cut:hover {
+    background-color: white;
+    border-color: #343a3f;
     color: #343a3f;
 }
