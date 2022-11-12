@@ -84,6 +84,7 @@ class Cut (models.Model):
         blank=False,
         default=False
         )
+    date_cut = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.invoice
