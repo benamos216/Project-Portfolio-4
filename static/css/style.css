@@ -154,3 +154,24 @@ button {
     border-color: #343a3f;
     color: #343a3f;
 }
+
+
+/* CSS for sign up/login/logout pages */
+
+.signup-btn {
+    background-color: #343a3f;
+    color: white;
+}
+
+.signup-btn:hover {
+    background-color: white;
+    color:#343a3f;
+}
+
+.link {
+    color: #343a3f;
+}
+
+.link:hover {
+    color: white;
+}

@@ -16,15 +16,17 @@
                                 <br>
                                 <span class="cut-text">Cut Size: {{ cuts.cut_size }}</span>
                                 <br>
-                                {% if cuts.cuts == True %}
-                                <span class="cut-text">Cut: Cut Done</span>
-                                <br>
-                                <span class="cut-text">Date of cut: {{ cuts.date_cut|date:"d M y" }} by {{ users.username }}</span>
-                                {% else %}
-                                <span class="cut-text">Cut: To Be Cut</span>
-                                <a href="/toggle/{{ cuts.id }}">
-                                    <button class="cut">Cut?</button>
-                                </a>
+                                {% if user.is_authenticated %}
+                                    {% if cuts.cuts == True %}
+                                    <span class="cut-text">Cut: Cut Done</span>
+                                    <br>
+                                    <span class="cut-text">Date of cut: {{ cuts.date_cut|date:"d M y" }} by {{ user.username }}</span>
+                                    {% else %}
+                                    <span class="cut-text">Cut: To Be Cut</span>
+                                    <a href="/toggle/{{ cuts.id }}">
+                                        <button class="cut">Cut?</button>
+                                    </a>
+                                    {% endif %}
                                 {% endif %}
                                 <span class="buttons">
                                     <a href="/delete_cut/{{ cuts.id }}">
