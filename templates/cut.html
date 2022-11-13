@@ -20,14 +20,13 @@
                                     {% if cuts.cuts == True %}
                                     <span class="cut-text">Cut: Cut Done</span>
                                     <br>
-                                    <span class="cut-text">Date of cut: {{ cuts.date_cut|date:"d M y" }} by {{ user.username }}</span>
+                                    <span class="cut-text">Date of cut: {{ cuts.date_cut|date:"d M y" }} by {{ cuts.cut_by }}</span>
                                     {% else %}
                                     <span class="cut-text">Cut: To Be Cut</span>
                                     <a href="/toggle/{{ cuts.id }}">
                                         <button class="cut">Cut?</button>
                                     </a>
                                     {% endif %}
-                                {% endif %}
                                 <span class="buttons">
                                     <a href="/delete_cut/{{ cuts.id }}">
                                         <button class="delete">Delete</button>
@@ -36,6 +35,7 @@
                                         <button class="edit">Edit</button>
                                     </a>
                                 </span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -45,6 +45,7 @@
         </div>
     </div>
     <br>
+    {% if user.is_authenticated %}
     <div class="container">
         <div class="center">
             <a href="/addcut">
@@ -52,6 +53,7 @@
             </a>
         </div>
     </div>
+    {% endif %}
     <br>
 </div>
 

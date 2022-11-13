@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
+from django.db.models import Sum, F, ExpressionWrapper
 
 # Create your views here.
 
@@ -130,6 +131,16 @@ def delete_roll(request, roll_id):
     return redirect('get_supplier')
 
 
+def update_roll_balance(request, roll_id):
+    rolls = get_object_or_404(Roll, id=roll_id)
+    Roll.objects.filter(roll__roll_size).annotate(total_cuts=Sum('cut__cut_size')).update(
+        roll_size= ExpressionWrapper(
+            F('roll_size')-F('total_cuts'), output_field=IntegerField()
+        )
+    )
+    return render(request, 'rolls.html')
+
+
 def getcuts(request, roll_id):
     rolls = get_object_or_404(Roll, id=roll_id)
     cuts = Cut.objects.filter(rolls=roll_id)
@@ -137,6 +148,15 @@ def getcuts(request, roll_id):
         'cuts': cuts
     }
     return render(request, 'cut.html', context)
+
+
+def update_cut_by(request):
+    form = CutForm(request.POST)
+    if form.is_valid():
+        cut = form.save(commit=False)
+        cut.cut_by = request.user
+        cut.save()
+    return render(request, 'cut.html')
 
 
 def addcut(request):
@@ -175,5 +195,6 @@ def delete_cut(request, cut_id):
 def toggle_cut(request, cut_id):
     cuts = get_object_or_404(Cut, id=cut_id)
     cuts.cuts = not cuts.cuts
+    cuts.cut_by = request.user
     cuts.save()
     return redirect('get_supplier')

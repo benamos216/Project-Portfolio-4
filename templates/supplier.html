@@ -16,6 +16,7 @@
                             </a>
                         </div>
                         <div>
+                            {% if user.is_authenticated %}
                             <span class="buttons">
                                 <a href="/delete_supplier/{{ suppliers.id }}">
                                     <button class="delete">Delete</button>
@@ -24,6 +25,7 @@
                                     <button class="edit">Edit</button>
                                 </a>
                             </span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -32,6 +34,7 @@
         </div>
     </div>
     <br>
+    {% if user.is_authenticated %}
     <div class="container">
         <div class="center">
             <a href="/add_supplier">
@@ -39,6 +42,7 @@
             </a>
         </div>
     </div>
+    {% endif %}
     <br>
 </div>
 
