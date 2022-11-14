@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Sum, F, ExpressionWrapper
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
-from django.db.models import Sum, F, ExpressionWrapper
+
 
 # Create your views here.
 
@@ -95,6 +96,8 @@ def get_rolls(request, range_id):
     context = {
         'rolls': rolls
     }
+    rolls.roll_balance = Roll.objects.annotate(total_balance=F('roll_size')-F('Cut__cut_size'))
+    rolls.save()
     return render(request, "rolls.html", context)
 
 
@@ -129,16 +132,6 @@ def delete_roll(request, roll_id):
     rolls = get_object_or_404(Roll, id=roll_id)
     rolls.delete()
     return redirect('get_supplier')
-
-
-def update_roll_balance(request, roll_id):
-    rolls = get_object_or_404(Roll, id=roll_id)
-    Roll.objects.filter(roll__roll_size).annotate(total_cuts=Sum('cut__cut_size')).update(
-        roll_size= ExpressionWrapper(
-            F('roll_size')-F('total_cuts'), output_field=IntegerField()
-        )
-    )
-    return render(request, 'rolls.html')
 
 
 def getcuts(request, roll_id):

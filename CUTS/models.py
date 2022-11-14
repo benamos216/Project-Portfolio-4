@@ -59,6 +59,7 @@ class Roll (models.Model):
         on_delete=models.CASCADE,
         related_name='Range'
         )
+    roll_balance = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return self.rolls
