@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <!-- Roll List -->
+        <!-- Cut List -->
         <div class="col-12 mt-3 left">
             <div class="row">
                 {% for cuts in cuts %}
@@ -12,10 +12,12 @@
                     <div class="card-cut mb-4">
                         <div class="card-body">
                             <div>
+                                <!-- Display Cut information -->
                                 <span class="cut-text">Invoice: {{ cuts.invoice }}</span>
                                 <br>
                                 <span class="cut-text">Cut Size: {{ cuts.cut_size }}</span>
                                 <br>
+                                <!-- Only signed in user can action -->
                                 {% if user.is_authenticated %}
                                     {% if cuts.cuts == True %}
                                     <span class="cut-text">Cut: Cut Done</span>
@@ -23,6 +25,7 @@
                                     <span class="cut-text">Date of cut: {{ cuts.date_cut|date:"d M y" }} by {{ cuts.cut_by }}</span>
                                     {% else %}
                                     <span class="cut-text">Cut: To Be Cut</span>
+                                    <!-- Actions a Marked cut and updates date and cut by -->
                                     <a href="/toggle/{{ cuts.id }}">
                                         <button class="cut">Cut?</button>
                                     </a>

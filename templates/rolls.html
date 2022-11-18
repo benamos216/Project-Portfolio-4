@@ -12,6 +12,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <a href="/getcuts/{{ rolls.id }}">
+                                <!-- Displays Roll information -->
                                 <h2 class="roll-text">{{ rolls.rolls }} {{ rolls.roll_width }}</h2>
                             </a>
                             <span class="roll-text">Roll Size: {{ rolls.roll_size }}</span>
@@ -19,11 +20,13 @@
                             <span class="roll-text">Warehouse Location: {{ rolls.location }}</span>
                             <br>
                             <span class="roll-text">Roll Balance left after cuts: {{ rolls.roll_balance }} </span>
+                            <!-- Updates Roll Balance by taking Roll size and taking away sum of cut sizes -->
                             <a href="/calc/{{ rolls.id }}">
                                 <button class="cut">Roll Balance</button>
                             </a>
                         </div>
                         <div>
+                            <!-- Only signed in users can action -->
                             {% if user.is_authenticated %}
                             <span class="buttons">
                                 <a href="/delete_roll/{{ rolls.id }}">

@@ -11,11 +11,13 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <!-- Display Supplier information -->
                             <a href="/get_ranges/{{ suppliers.id }}">
                                 <h2 class="card-text">{{ suppliers.supplier }}</h2>
                             </a>
                         </div>
                         <div>
+                            <!-- Only signed in users can action -->
                             {% if user.is_authenticated %}
                             <span class="buttons">
                                 <a href="/delete_supplier/{{ suppliers.id }}">
