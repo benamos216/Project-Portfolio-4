@@ -19,6 +19,9 @@
                             <span class="roll-text">Warehouse Location: {{ rolls.location }}</span>
                             <br>
                             <span class="roll-text">Roll Balance left after cuts: {{ rolls.roll_balance }} </span>
+                            <a href="/calc/{{ rolls.id }}">
+                                <button class="cut">Roll Balance</button>
+                            </a>
                         </div>
                         <div>
                             {% if user.is_authenticated %}

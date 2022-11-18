@@ -45,6 +45,16 @@
             <span class="navbar-toggler-icon"></span>
           </button>
         </nav>
+        {% include 'includes/messages.html' %}
+        {% if user.is_authenticated %}
+        <div class="text-white user-signup">
+          USER: {{ user }}
+        </div>
+        {% else %}
+        <div class="text-white user-signup">
+          PLEASE LOG IN
+        </div>
+        {% endif %}
       </div>
     <main>
       {% block content %}

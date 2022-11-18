@@ -13,6 +13,15 @@ body {
     border-color:rgb(218, 217, 38);
 }
 
+.user-signup {
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+
+.alert {
+    float: right;
+}
+
 main {
     height: 1500px;
 }

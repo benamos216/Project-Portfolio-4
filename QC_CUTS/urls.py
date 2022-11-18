@@ -40,10 +40,10 @@ urlpatterns = [
     path('edit_roll/<roll_id>', views.edit_roll, name='edit_roll'),
     path('delete_roll/<roll_id>', views.delete_roll, name='delete_roll'),
     path('getcuts/<roll_id>', views.getcuts, name='getcuts'),
-    path('update_cut_by', views.update_cut_by, name='update_cut_by'),
     path('addcut', views.addcut, name='addcut'),
     path('edit_cut/<cut_id>', views.edit_cut, name='edit_cut'),
     path('delete_cut/<cut_id>', views.delete_cut, name='delete_cut'),
     path('toggle/<cut_id>', views.toggle_cut, name='toggle'),
     path('accounts/', include('allauth.urls')),
+    path('calc/<roll_id>', views.calc, name='calc'),
 ]

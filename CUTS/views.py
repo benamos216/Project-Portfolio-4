@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Sum, F, ExpressionWrapper
+from django.db.models import Sum, F, ExpressionWrapper, IntegerField
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
+from django.contrib import messages
 
 
 # Create your views here.
 
 
 def get_supplier(request):
+    """
+    Renders main page, with suppliers available
+    """
     suppliers = Supplier.objects.all()
     context = {
         'suppliers': suppliers
@@ -16,9 +20,13 @@ def get_supplier(request):
 
 
 def add_supplier(request):
+    """
+    Adds new supplier
+    """
     if request.method == "POST":
         form = SupplierForm(request.POST)
         if form.is_valid():
+            messages.success(request, 'Supplier Added.')
             form.save()
             return redirect('get_supplier')
     form = SupplierForm()
@@ -29,11 +37,15 @@ def add_supplier(request):
 
 
 def edit_supplier(request, supplier_id):
+    """
+    Edit's existing suppliers and updates database with any changes
+    """
     supplier = get_object_or_404(Supplier, id=supplier_id)
     if request.method == "POST":
         form = SupplierForm(request.POST, instance=supplier)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Supplier Updated.')
             return redirect('get_supplier')
     form = SupplierForm(instance=supplier)
     context = {
@@ -43,12 +55,19 @@ def edit_supplier(request, supplier_id):
 
 
 def delete_supplier(request, supplier_id):
+    """
+    Delete's selected supplier
+    """
     supplier = get_object_or_404(Supplier, id=supplier_id)
     supplier.delete()
+    messages.success(request, 'Supplier Deleted.')
     return redirect('get_supplier')
 
 
 def get_ranges(request, supplier_id):
+    """
+    Returns relevant Ranges linked to the Supplier Id that is selected
+    """
     supplier = get_object_or_404(Supplier, id=supplier_id)
     ranges = Range.objects.filter(supplier=supplier_id)
     context = {
@@ -58,10 +77,14 @@ def get_ranges(request, supplier_id):
 
 
 def add_range(request):
+    """
+    Creates new Range within Supplier
+    """
     if request.method == "POST":
         form = RangeForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Range Added.')
             return redirect('get_supplier')
     form = RangeForm()
     context = {
@@ -71,11 +94,15 @@ def add_range(request):
 
 
 def edit_range(request, range_id):
+    """
+    Edits existing Range, and updates database
+    """
     ranges = get_object_or_404(Range, id=range_id)
     if request.method == "POST":
         form = RangeForm(request.POST, instance=ranges)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Range Edited.')
             return redirect('get_supplier')
     form = RangeForm(instance=ranges)
     context = {
@@ -85,27 +112,36 @@ def edit_range(request, range_id):
 
 
 def delete_range(request, range_id):
+    """
+    Deletes Range from Database, and subsequent data linked with it
+    """
     ranges = get_object_or_404(Range, id=range_id)
     ranges.delete()
+    messages.success(request, 'Range Deleted.')
     return redirect('get_supplier')
 
 
 def get_rolls(request, range_id):
+    """
+    Returns all Rolls linked with the selected Range Id in the database
+    """
     ranges = get_object_or_404(Range, id=range_id)
     rolls = Roll.objects.filter(ranges=range_id)
     context = {
         'rolls': rolls
     }
-    rolls.roll_balance = Roll.objects.annotate(total_balance=F('roll_size')-F('Cut__cut_size'))
-    rolls.save()
     return render(request, "rolls.html", context)
 
 
 def addroll(request):
+    """
+    Adds Roll to Database
+    """
     if request.method == "POST":
         form = RollForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Roll Added.')
             return redirect('get_supplier')
     form = RollForm()
     context = {
@@ -115,11 +151,15 @@ def addroll(request):
 
 
 def edit_roll(request, roll_id):
+    """
+    Edits existing Roll, and updates the database
+    """
     rolls = get_object_or_404(Roll, id=roll_id)
     if request.method == "POST":
         form = RollForm(request.POST, instance=rolls)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Roll Updated.')
             return redirect('get_supplier')
     form = RollForm(instance=rolls)
     context = {
@@ -129,12 +169,19 @@ def edit_roll(request, roll_id):
 
 
 def delete_roll(request, roll_id):
+    """
+    Deletes selected Roll, and any linked data with it from the database
+    """
     rolls = get_object_or_404(Roll, id=roll_id)
     rolls.delete()
+    messages.success(request, 'Roll Deleted.')
     return redirect('get_supplier')
 
 
 def getcuts(request, roll_id):
+    """
+    Returns cuts from the database linked to the Roll Id
+    """
     rolls = get_object_or_404(Roll, id=roll_id)
     cuts = Cut.objects.filter(rolls=roll_id)
     context = {
@@ -143,20 +190,15 @@ def getcuts(request, roll_id):
     return render(request, 'cut.html', context)
 
 
-def update_cut_by(request):
-    form = CutForm(request.POST)
-    if form.is_valid():
-        cut = form.save(commit=False)
-        cut.cut_by = request.user
-        cut.save()
-    return render(request, 'cut.html')
-
-
 def addcut(request):
+    """
+    Adds cut to the database
+    """
     if request.method == "POST":
         form = CutForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Cut Added.')
             return redirect('get_supplier')
     form = CutForm()
     context = {
@@ -166,11 +208,15 @@ def addcut(request):
 
 
 def edit_cut(request, cut_id):
+    """
+    Edits existing cut, and updates the database
+    """
     cuts = get_object_or_404(Cut, id=cut_id)
     if request.method == "POST":
         form = CutForm(request.POST, instance=cuts)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Cut Updated.')
             return redirect('get_supplier')
     form = CutForm(instance=cuts)
     context = {
@@ -180,14 +226,41 @@ def edit_cut(request, cut_id):
 
 
 def delete_cut(request, cut_id):
+    """
+    Deletes selected cut from the database
+    """
     cuts = get_object_or_404(Cut, id=cut_id)
     cuts.delete()
+    messages.success(request, 'Cut Deleted.')
     return redirect('get_supplier')
 
 
 def toggle_cut(request, cut_id):
+    """
+    When button is clicked, updates database that the cut has been made,
+    who made the cut, and date of cut
+    """
     cuts = get_object_or_404(Cut, id=cut_id)
     cuts.cuts = not cuts.cuts
     cuts.cut_by = request.user
     cuts.save()
+    messages.success(request, 'Cut has been marked!')
+    return redirect('get_supplier')
+
+
+def calc(request, roll_id):
+    """
+    Works out the remaining Roll Balance, taking the roll size
+    and subtracting the total of the cut sizes linked to that
+    roll. To be updated every time a new cut is added.
+    """
+    rolls = get_object_or_404(Roll, id=roll_id)
+    # total_cut = Cut.objects.values('rolls').annotate(Sum('cut_size'))
+    total_roll = Roll.objects.annotate(rolls.roll_size)
+    # total_roll = 25
+    total_cut = Cut.objects.values('rolls').annotate(Sum('cut_size'))
+    # total_cut = 4
+    rolls.roll_balance = total_roll - total_cut
+    rolls.save()
+    messages.success(request, 'Roll Balance calculated!')
     return redirect('get_supplier')
