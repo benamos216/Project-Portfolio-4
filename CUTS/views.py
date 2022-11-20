@@ -3,6 +3,7 @@ from django.db.models import Sum, F, ExpressionWrapper, IntegerField
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
 from django.contrib import messages
+from decimal import Decimal
 
 
 # Create your views here.
@@ -255,12 +256,18 @@ def calc(request, roll_id):
     roll. To be updated every time a new cut is added.
     """
     rolls = get_object_or_404(Roll, id=roll_id)
-    # total_cut = Cut.objects.values('rolls').annotate(Sum('cut_size'))
-    total_roll = Roll.objects.annotate(rolls.roll_size)
-    # total_roll = 25
-    total_cut = Cut.objects.values('rolls').annotate(Sum('cut_size'))
-    # total_cut = 4
-    rolls.roll_balance = total_roll - total_cut
-    rolls.save()
+    if rolls == roll_id:
+        # total_roll = Roll.objects.values_list('roll_size')
+        # total_cut = Cut.objects.values('rolls').values_list(Sum('cut_size'))
+        total_cut = Cut.objects.values('rolls_id').annotate(Sum('cut_size'))
+        total_roll = Roll.objects.values('rolls').annotate(Sum('roll_size'))
+        # total_cut = Cut.objects.values('rolls').aggregate(Sum('cut_size'))
+        # balance = quantize('total_roll') - quantize('total_cut')
+        # balance = [total_roll.int(['roll_size__sum'])] - [total_cut.int(['cut_size__sum'])]
+        roll = total_roll[0]['roll_size__sum']
+        cut = total_cut[0]['cut_size__sum']
+        balance = roll - cut
+        rolls.roll_balance = balance
+        rolls.save()
     messages.success(request, 'Roll Balance calculated!')
     return redirect('get_supplier')

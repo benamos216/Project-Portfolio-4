@@ -43,9 +43,7 @@ class Roll (models.Model):
         null=False,
         blank=False
         )
-    roll_size = models.DecimalField(
-        max_digits=4,
-        decimal_places=2,
+    roll_size = models.IntegerField(
         null=False,
         blank=False
         )
@@ -59,7 +57,7 @@ class Roll (models.Model):
         on_delete=models.CASCADE,
         related_name='Range'
         )
-    roll_balance = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    roll_balance = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.rolls
@@ -76,9 +74,7 @@ class Cut (models.Model):
         null=False,
         blank=False
         )
-    cut_size = models.DecimalField(
-        max_digits=4,
-        decimal_places=2,
+    cut_size = models.IntegerField(
         null=False,
         blank=False
         )
