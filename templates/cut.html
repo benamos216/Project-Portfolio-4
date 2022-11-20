@@ -58,6 +58,11 @@
     </div>
     {% endif %}
     <br>
+    <span class="roll-text">Roll Balance left after cuts: {{ balance }}m left </span>
+                            <!-- Updates Roll Balance by taking Roll size and taking away sum of cut sizes -->
+                            <a href="/calc/{{ cuts.id }}">
+                                <button class="cut">Roll Balance</button>
+                            </a>
 </div>
 
 {% endblock content %}

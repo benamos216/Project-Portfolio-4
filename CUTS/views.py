@@ -185,8 +185,14 @@ def getcuts(request, roll_id):
     """
     rolls = get_object_or_404(Roll, id=roll_id)
     cuts = Cut.objects.filter(rolls=roll_id)
+    total_cut = Cut.objects.values('cuts').annotate(Sum('cut_size'))
+    total_roll = Roll.objects.values('rolls').annotate(Sum('roll_size'))
+    roll = total_roll[0]['roll_size__sum']
+    cut = total_cut[0]['cut_size__sum']
+    balance = roll - cut
     context = {
-        'cuts': cuts
+        'cuts': cuts,
+        'balance': balance
     }
     return render(request, 'cut.html', context)
 
@@ -256,18 +262,13 @@ def calc(request, roll_id):
     roll. To be updated every time a new cut is added.
     """
     rolls = get_object_or_404(Roll, id=roll_id)
-    if rolls == roll_id:
-        # total_roll = Roll.objects.values_list('roll_size')
-        # total_cut = Cut.objects.values('rolls').values_list(Sum('cut_size'))
-        total_cut = Cut.objects.values('rolls_id').annotate(Sum('cut_size'))
-        total_roll = Roll.objects.values('rolls').annotate(Sum('roll_size'))
-        # total_cut = Cut.objects.values('rolls').aggregate(Sum('cut_size'))
-        # balance = quantize('total_roll') - quantize('total_cut')
-        # balance = [total_roll.int(['roll_size__sum'])] - [total_cut.int(['cut_size__sum'])]
-        roll = total_roll[0]['roll_size__sum']
-        cut = total_cut[0]['cut_size__sum']
-        balance = roll - cut
-        rolls.roll_balance = balance
-        rolls.save()
+    cuts = Roll.objects.filter(rolls=roll_id)
+    total_cut = Cut.objects.values('rolls_id').annotate(Sum('cut_size'))
+    total_roll = Roll.objects.values('rolls').annotate(Sum('roll_size'))
+    cut = total_cut[roll_id == 'rolls_id']['cut_size__sum']
+    roll = total_roll[rolls == 'rolls']['roll_size__sum']
+    balance = roll - cut
+    rolls.roll_balance = balance
+    rolls.save()
     messages.success(request, 'Roll Balance calculated!')
     return redirect('get_supplier')
