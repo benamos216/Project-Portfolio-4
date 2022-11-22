@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- Only signed in users can action -->
-{% if is.authenticated %}
+{% if user.is_authenticated %}
 <div class="container-fluid">
     <div class="row">
         <!-- Supplier List -->
