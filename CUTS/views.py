@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.db.models import Sum, F, ExpressionWrapper, IntegerField
+from django.db.models import Sum
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
 from django.contrib import messages
-from decimal import Decimal
 
 
 # Create your views here.

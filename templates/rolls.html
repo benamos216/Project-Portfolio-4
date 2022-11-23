@@ -2,15 +2,19 @@
 
 {% block content %}
 
+<!-- Only signed in user can see -->
+{% if user.is_authenticated %}
 <div class="container-fluid">
     <div class="row">
         <!-- Roll List -->
         <div class="col-12 mt-3 left">
             <div class="row">
+                <!-- Cycles through the rolls and displays all information -->
                 {% for rolls in rolls %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <!-- Directs to cut page -->
                             <a href="/getcuts/{{ rolls.id }}">
                                 <!-- Displays Roll information -->
                                 <h2 class="roll-text">{{ rolls.rolls }} {{ rolls.roll_width }}</h2>
@@ -26,17 +30,15 @@
                             </a>
                         </div>
                         <div>
-                            <!-- Only signed in users can action -->
-                            {% if user.is_authenticated %}
+                            <!-- Delete and Edit buttons, delete displays a warning -->
                             <span class="buttons">
-                                <a href="/delete_roll/{{ rolls.id }}">
+                                <a class='confirm-delete' href="/delete_roll/{{ rolls.id }}">
                                     <button class="delete">Delete</button>
                                 </a>
                                 <a href="/edit_roll/{{ rolls.id }}">
                                     <button class="edit">Edit</button>
                                 </a>
                             </span>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -45,7 +47,7 @@
         </div>
     </div>
     <br>
-    {% if user.is_authenticated %}
+    <!-- Allows the user to add new rolls -->
     <div class="container">
         <div class="center">
             <a href="/addroll">
@@ -53,8 +55,7 @@
             </a>
         </div>
     </div>
-    {% endif %}
-    <br>
 </div>
+{% endif %}
 
 {% endblock content %}

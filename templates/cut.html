@@ -2,11 +2,14 @@
 
 {% block content %}
 
+<!-- Only signed in user can action -->
+{% if user.is_authenticated %}
 <div class="container-fluid">
     <div class="row">
         <!-- Cut List -->
         <div class="col-12 mt-3 left">
             <div class="row">
+                <!-- Cycles through the cuts and displays each one -->
                 {% for cuts in cuts %}
                 <div class="col-md-4">
                     <div class="card-cut mb-4">
@@ -17,13 +20,13 @@
                                 <br>
                                 <span class="cut-text">Cut Size: {{ cuts.cut_size }}</span>
                                 <br>
-                                <!-- Only signed in user can action -->
-                                {% if user.is_authenticated %}
+                                    <!-- If cuts is True, shows as cut and who marked it and when -->
                                     {% if cuts.cuts == True %}
                                     <span class="cut-text">Cut: Cut Done</span>
                                     <br>
                                     <span class="cut-text">Date of cut: {{ cuts.date_cut|date:"d M y" }} by {{ cuts.cut_by }}</span>
                                     {% else %}
+                                    <!-- Shows that the cut is still to be done -->
                                     <span class="cut-text">Cut: To Be Cut</span>
                                     <!-- Actions a Marked cut and updates date and cut by -->
                                     <a href="/toggle/{{ cuts.id }}">
@@ -31,14 +34,14 @@
                                     </a>
                                     {% endif %}
                                 <span class="buttons">
-                                    <a href="/delete_cut/{{ cuts.id }}">
+                                    <!-- Delete and Edit buttons, warning message displays for delete -->
+                                    <a class='confirm-delete' href="/delete_cut/{{ cuts.id }}">
                                         <button class="delete">Delete</button>
                                     </a>
                                     <a href="/edit_cut/{{ cuts.id }}">
                                         <button class="edit">Edit</button>
                                     </a>
                                 </span>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -48,7 +51,7 @@
         </div>
     </div>
     <br>
-    {% if user.is_authenticated %}
+    <!-- Allows the user to add a new cut -->
     <div class="container">
         <div class="center">
             <a href="/addcut">
@@ -56,13 +59,7 @@
             </a>
         </div>
     </div>
-    {% endif %}
-    <br>
-    <span class="roll-text">Roll Balance left after cuts: {{ balance }}m left </span>
-                            <!-- Updates Roll Balance by taking Roll size and taking away sum of cut sizes -->
-                            <a href="/calc/{{ cuts.id }}">
-                                <button class="cut">Roll Balance</button>
-                            </a>
 </div>
+{% endif %}
 
 {% endblock content %}

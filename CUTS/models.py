@@ -57,7 +57,11 @@ class Roll (models.Model):
         on_delete=models.CASCADE,
         related_name='Range'
         )
-    roll_balance = models.CharField(max_length=10, null=True, blank=True)
+    roll_balance = models.CharField(
+        max_length=10,
+        null=True,
+        blank=True
+        )
 
     def __str__(self):
         return self.rolls
@@ -83,8 +87,15 @@ class Cut (models.Model):
         blank=False,
         default=False
         )
-    date_cut = models.DateTimeField(auto_now_add=True)
-    cut_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    date_cut = models.DateTimeField(
+        auto_now_add=True
+        )
+    cut_by = models.ForeignKey(
+        User,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE
+        )
 
     def __str__(self):
         return self.invoice
