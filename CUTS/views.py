@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.db.models import Sum, F, ExpressionWrapper, IntegerField
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
@@ -86,7 +86,7 @@ def add_range(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Range Added.')
-            return redirect('get_supplier')
+            return redirect(reverse('get_supplier'))
     form = RangeForm()
     context = {
         'form': form
@@ -185,14 +185,8 @@ def getcuts(request, roll_id):
     """
     rolls = get_object_or_404(Roll, id=roll_id)
     cuts = Cut.objects.filter(rolls=roll_id)
-    total_cut = Cut.objects.values('cuts').annotate(Sum('cut_size'))
-    total_roll = Roll.objects.values('rolls').annotate(Sum('roll_size'))
-    roll = total_roll[0]['roll_size__sum']
-    cut = total_cut[0]['cut_size__sum']
-    balance = roll - cut
     context = {
         'cuts': cuts,
-        'balance': balance
     }
     return render(request, 'cut.html', context)
 
@@ -252,7 +246,7 @@ def toggle_cut(request, cut_id):
     cuts.cut_by = request.user
     cuts.save()
     messages.success(request, 'Cut has been marked!')
-    return redirect('get_supplier')
+    return redirect(reverse('get_supplier'))
 
 
 def calc(request, roll_id):
@@ -262,11 +256,12 @@ def calc(request, roll_id):
     roll. To be updated every time a new cut is added.
     """
     rolls = get_object_or_404(Roll, id=roll_id)
-    cuts = Roll.objects.filter(rolls=roll_id)
-    total_cut = Cut.objects.values('rolls_id').annotate(Sum('cut_size'))
-    total_roll = Roll.objects.values('rolls').annotate(Sum('roll_size'))
-    cut = total_cut[roll_id == 'rolls_id']['cut_size__sum']
-    roll = total_roll[rolls == 'rolls']['roll_size__sum']
+    total_cut = Cut.objects.values('rolls').annotate(Sum('cut_size'))
+    total_roll = Roll.objects.values('id').annotate(Sum('roll_size'))
+    cut_filter = total_cut.filter(rolls=roll_id)
+    cut = cut_filter[0]['cut_size__sum']
+    roll_filter = total_roll.filter(id=roll_id)
+    roll = roll_filter[0]['roll_size__sum']
     balance = roll - cut
     rolls.roll_balance = balance
     rolls.save()

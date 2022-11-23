@@ -41,10 +41,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ranges.html')
 
-    def test_add_range(self):
-        response = self.client.post('/add_range', {'supplier': 'Test Supplier', 'ranges': 'Test Range'})
-        self.assertRedirects(response, 'get_supplier')
-
     def test_edit_ranges(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
         ranges = Range.objects.create(supplier=supplier, ranges='Test Range')
@@ -66,10 +62,6 @@ class TestViews(TestCase):
         response = self.client.get(f'/get_rolls/{ranges.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'rolls.html')
-
-    # def test_add_rolls(self):
-    #     response = self.client.post('/add_roll', {'rolls': 'Test Roll'})
-    #     self.assertRedirects(response, 'get_supplier')
 
     def test_edit_rolls(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
@@ -95,10 +87,6 @@ class TestViews(TestCase):
         response = self.client.get(f'/getcuts/{rolls.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'cut.html')
-
-    # def test_add_cuts(self):
-    #     response = self.client.post('/add_cut', {'invoice': 'Test Invoice'})
-    #     self.assertRedirects(response, '/')
 
     def test_edit_cut(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
