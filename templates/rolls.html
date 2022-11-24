@@ -25,18 +25,18 @@
                             <br>
                             <span class="roll-text">Roll Balance left after cuts: {{ rolls.roll_balance }}m left </span>
                             <!-- Updates Roll Balance by taking Roll size and taking away sum of cut sizes -->
-                            <a href="/calc/{{ rolls.id }}">
-                                <button class="cut">Roll Balance</button>
+                            <a class="cut" href="/calc/{{ rolls.id }}">
+                                Roll Balance
                             </a>
                         </div>
                         <div>
                             <!-- Delete and Edit buttons, delete displays a warning -->
                             <span class="buttons">
-                                <a class='confirm-delete' href="/delete_roll/{{ rolls.id }}">
-                                    <button class="delete">Delete</button>
+                                <a class='confirm-delete delete' href="/delete_roll/{{ rolls.id }}">
+                                    Delete
                                 </a>
-                                <a href="/edit_roll/{{ rolls.id }}">
-                                    <button class="edit">Edit</button>
+                                <a class="edit" href="/edit_roll/{{ rolls.id }}">
+                                    Edit
                                 </a>
                             </span>
                         </div>
@@ -50,8 +50,8 @@
     <!-- Allows the user to add new rolls -->
     <div class="container">
         <div class="center">
-            <a href="/addroll">
-                <button class="main-button">ADD ROLL</button>
+            <a class="main-button" href="/addroll">
+                ADD ROLL
             </a>
         </div>
     </div>

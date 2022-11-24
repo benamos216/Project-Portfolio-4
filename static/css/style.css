@@ -121,6 +121,22 @@ button {
     background-color: #343a3f;
     border:rgb(218, 217, 38) 1px solid;
     color:rgb(218, 217, 38);
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .add {
@@ -138,12 +154,30 @@ button {
     background-color: rgb(218, 217, 38);
     border:rgb(218, 217, 38) 1px solid;
     color: white;
+    text-decoration: none;
 }
 
 .main-button {
     background-color: #343a3f;
     border:white 1px solid;
     color:white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .center {
@@ -160,6 +194,25 @@ button {
 
 .cut {
     background-color: rgb(218, 217, 38);
+    color: #343a3f;
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .cut:hover {

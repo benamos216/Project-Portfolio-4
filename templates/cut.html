@@ -29,17 +29,17 @@
                                     <!-- Shows that the cut is still to be done -->
                                     <span class="cut-text">Cut: To Be Cut</span>
                                     <!-- Actions a Marked cut and updates date and cut by -->
-                                    <a href="/toggle/{{ cuts.id }}">
-                                        <button class="cut">Cut?</button>
+                                    <a class="cut" href="/toggle/{{ cuts.id }}">
+                                        Cut?
                                     </a>
                                     {% endif %}
                                 <span class="buttons">
                                     <!-- Delete and Edit buttons, warning message displays for delete -->
-                                    <a class='confirm-delete' href="/delete_cut/{{ cuts.id }}">
-                                        <button class="delete">Delete</button>
+                                    <a class='confirm-delete delete' href="/delete_cut/{{ cuts.id }}">
+                                        Delete
                                     </a>
-                                    <a href="/edit_cut/{{ cuts.id }}">
-                                        <button class="edit">Edit</button>
+                                    <a class="edit" href="/edit_cut/{{ cuts.id }}">
+                                        Edit
                                     </a>
                                 </span>
                             </div>
@@ -54,8 +54,8 @@
     <!-- Allows the user to add a new cut -->
     <div class="container">
         <div class="center">
-            <a href="/addcut">
-                <button class="main-button">ADD CUT</button>
+            <a class="main-button" href="/addcut">
+                ADD CUT
             </a>
         </div>
     </div>

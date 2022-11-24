@@ -60,10 +60,13 @@ Main colour scheme based on the company's own colours,
 # User Responsiveness
 
 <!-- IMAGE OF AIREPONSIVENESS -->
+![Responsive Image](media/readme/responsive.png)
 
 # Lighthouse Performance
 
 <!-- images of lighthouse-->
+![Desktop Lighthouse](media/readme/lighthouse1.png)
+![Mobile Lighthouse](media/readme/lighthouse2.png)
 
 # Frameworks, Libraries & Dependancies
 
@@ -127,9 +130,9 @@ Several issues arose during the course of this project, causing bugs and errors 
 
 - Roll Balance Calculation - initially we had problems retrieving the required data from 2 Models at once to perform the calculation. Data that was being pulled, was for all cuts or rolls, this was being caused by aggregating the data into one total. Once we had annotated through the data, creating data related to the relevant Roll ID, we then had issues iterating over the data to the correct item. At this point it was just pulling the first item for both Roll Size and the Sum of Cuts. We then had to filter over the Queryset by roll_id, this then produced a new Queryset with 1 result in, by which we could call by its index of 0. As a result, we can now pull the correct Roll Size and Sum of Cuts related to each relevant roll by its ID.
 
-- Migrations -
+- Migrations - during the course of the project, it was noticed that some of the models had been initially set up incorrectly. When these were corrected, and migrations were made as part of the standard process. When making these migrations, an error was brought up, and not creating the migrations. As a result, one of the Models was not accessable from the Database/Admin panel. Issue was raised on Slack, and it was suggested to clear previous migrations off the system, and re run. This allowed for the migrations to go through and all Models were again showing on the Database and Admin panel.
 
-- Redirects - 
+- Redirects - originally redirects when adding or editing an item was to redirect back to the page the user was on previously. This was being problematic to complete, and threw back errors. As a result the user is taken back to the main page, this is a minor inconvenience, and something that would be looked at in the future developement.
 
 # Deployment
 
@@ -138,4 +141,6 @@ Several issues arose during the course of this project, causing bugs and errors 
 
 Hello-Django
 Django-Blog
+
+Slack
 Andy

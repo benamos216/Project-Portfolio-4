@@ -22,11 +22,11 @@
                         <div>
                             <!-- Delete and Edit buttons, delete displays warning -->
                             <span class="buttons">
-                                <a class='confirm-delete' href="/delete_range/{{ ranges.id }}">
-                                    <button class="delete">Delete</button>
+                                <a class='confirm-delete delete' href="/delete_range/{{ ranges.id }}">
+                                    Delete
                                 </a>
-                                <a href="/edit_range/{{ ranges.id }}">
-                                    <button class="edit">Edit</button>
+                                <a class="edit" href="/edit_range/{{ ranges.id }}">
+                                    Edit
                                 </a>
                             </span>
                         </div>
@@ -40,8 +40,8 @@
     <!-- Allows the user to add a new range -->
     <div class="container">
         <div class="center">
-            <a href="/add_range">
-                <button class="main-button">ADD RANGE</button>
+            <a class="main-button" href="/add_range">
+                ADD RANGE
             </a>
         </div>
     </div>
