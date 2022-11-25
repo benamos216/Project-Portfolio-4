@@ -76,7 +76,6 @@ footer {
 
 .card-text {
     text-align: center;
-    float: auto;
     color:white;
     text-decoration: none;
 }
@@ -87,7 +86,6 @@ footer {
 
 .cut-text {
     text-align: center;
-    float: auto;
     color:white;
     text-decoration: none;
     margin-left: 10px;
@@ -96,7 +94,6 @@ footer {
 
 .roll-text {
     text-align: center;
-    float: auto;
     color:white;
     text-decoration: none;
 }
@@ -152,7 +149,7 @@ button {
 
 .delete:hover, .edit:hover, .add:hover {
     background-color: rgb(218, 217, 38);
-    border:rgb(218, 217, 38) 1px solid;
+    border: 1px solid;
     color: white;
     text-decoration: none;
 }
@@ -188,7 +185,7 @@ button {
 
 .main-button:hover {
     background-color: white;
-    border:white 1px solid;
+    border: 1px solid;
     color: #343a3f;
 }
 

@@ -27,7 +27,7 @@ Allows the user to delete data that is no longer required. i.e Rolls that have b
 
 Before coding could be started, we needed to look at the how the Database would look. How tables would link to one and another and how the data would flow from one to another. This is where the Database Schema comes is, as a visual tool to show all of this. Also showing the Primary and Foreign Keys linking the tables.
 
-<!-- link to database image -->
+![Database Schema](/media/readme/Database.png)
 
 From the image above, you can see the tables flow from one to another, from Supplier - Range - Roll - Cut. The Foreign Key in the each table is the Primary Key from the previous (exlcuding Supplier, as this is the first table). With this set, we can now start to look at how we would develop the site.
 
@@ -59,16 +59,32 @@ Main colour scheme based on the company's own colours,
 
 # User Responsiveness
 
-<!-- IMAGE OF AIREPONSIVENESS -->
+Image of how the site will look on different platforms, from Desktop to Mobile.
+
 ![Responsive Image](media/readme/responsive.png)
 
 # Lighthouse Performance
 
-<!-- images of lighthouse-->
+We used Google's Chrome built in Lighthouse Report to measure the performance of the site. This was measured for both Desktop and Mobile use. As you'll see from the images below, for the Desktop lighthouse scored well on most sections apart from the SEO, where there could be improvement made, although this is not a necessity fro this site. With the Mobile lighthouse it again scored well on most areas, with SEO being the poorest score of them all.
+
 ![Desktop Lighthouse](media/readme/lighthouse1.png)
 ![Mobile Lighthouse](media/readme/lighthouse2.png)
 
+# Validation
+
+To ensure correct methods of coding was followed, several validation test were carried out.
+
+Firstly all pages from the site were passed through https://validator.w3.org/ to check HTML coding. Due to Python coding, direct page source had to be taken from each rendered page. Initially we were advised to add a language within the HTML tag, as well as warned about having a 'Button' within a 'Span'. These have now been corrected and as such all pages have been checked and show no warnings or errors.
+
+Secondly CSS for the site was passed through https://jigsaw.w3.org/css-validator/. Orginally it came back with a duplication of Background color for the buttons when hovered over. Also found that the 'card-body' had a float set to auto, when not required. These have been corrected, and as such no errors are now showing.
+
+![CSS Validation](/media/readme/Validation.png)
+
+Thirdly, usually we would've used PEP8online to validate our Python code. Since this site doesn't appear to be functioning at present, we have used Pycodestyle with Gitpod to check code. This allowed for errors to be displayed as Problems in a separate window within the coding environment. As a result, these errors were fixed as and when they arose when coding. Generally, these errors would be missing whitespaces, extra whitespaces, invalid syntax or line too long.
+
 # Frameworks, Libraries & Dependancies
+
+The following packages were used to create this project.
 
 ### Django 3.2
 [Python web framework](https://www.djangoproject.com/)
@@ -95,20 +111,68 @@ https://pypi.org/project/django-cloudinary-storage/
 ### Bootstrap 4.6.2
 [Front end CSS and JavaScript library](https://getbootstrap.com/)
 
-
-The following packages were used to create this project.
-
 # Features
 
-Signup/Login
-Create
-Edit
-Delete
-Roll Balance
-Cut
-Messages
-Delete Warning#
-Admin
+- Nav Bar -
+A simple Nav Bar was used, using the Bootstrap's 'Burger' Icon, allowing the user to do a few operations, such as Login/Signup, Return to Home Page, Login as Admin or Logout. It will also show the user that is logged in at the time.
+
+![Image of Navbar](/media/readme/navmain.png)
+
+- Signup/Login -
+We used 'Allauth' for user signup and login. Again this is a simple system, as all that is required is a Username and Password to register for use on the site.
+
+![Signup Form](/media/readme/signup.png)
+![Login Form](/media/readme/login.png)
+
+- Create -
+Using Django's builtin forms, again a simple form was added to allow the user to input data. It will only show the fields that the user is allowed to add to at that time.
+
+![Add Supplier](/media/readme/addsupplier.png)
+![Add Range](/media/readme/addrange.png)
+![Add Roll](/media/readme/addroll.png)
+![Add Cut](/media/readme/addcut.png)
+
+- Edit -
+Again uses Django's builtin forms, it is just a copy of the 'Add' forms, again only allowed the user to edit the data on certain fields.
+
+![Edit Supplier](/media/readme/editsupplier.png)
+![Edit Range](/media/readme/editrange.png)
+![Edit Roll](/media/readme/editroll.png)
+![Edit Cut](/media/readme/editcut.png)
+
+- Roll Balance -
+One of the functions that was required from the site, was to calculate the remaining balance of a roll. This is done by a simple calculation upon clicking the 'Roll Balance' button. From the images below, the initial remain balance is '20m', this is because the roll is 25m in length and there is currently one cut allocated against the roll, for the length of 5m. So 25m-5m=20m. Now when we allocate a new cut, with the length of 3m, and then click on the 'Roll Balance' button, the remaining balance is updated to 17m, 25m-5m-3m. This allows for a user to see if there is sufficient stock to allocate a cut to, or if they need to order in an additional roll.
+
+![Roll Balance](/media/readme/RollBalance1.png)
+![Current Cut](/media/readme/CurrentCut.png)
+![New Cut](/media/readme/NewCut.png)
+![Updated Roll Balance](/media/readme/RollBalanceUpdate.png)
+
+- Cut -
+Another function that was required, was a way of marking that an allocated cut had been actioned. As you can see from the image below, we have 3 cuts allocated. The first is yet to be cut, and has a 'Cut?' button next to it. Once a user has actioned a Cut, they click the button, and then the Cut is updated as Cut, with Date and User who actioned it. As shown with the second and third Cut in the image.
+
+![Cut](/media/readme/cut.png)
+
+- Incorrect Input -
+While filling out the forms, either to add or edit an item, only correct inputs will be allowed. If they do try to input something that they cannot, a prompt will come up to let the user know that they have entered and incorrect item.
+
+![Incorrect Input](/media/readme/Incorrect%20Input.png)
+
+- Messages -
+Every time the user actions something within the site, a message will be displayed in the top right corner of the screen. This is set to display for 3 seconds and then remove itself. This allows the user to track what they have just done, but doesn't distract them as it clears itself.
+
+![Messages](/media/readme/message.png)
+
+- Delete Warning -
+If the user wants to delete an item from the Database, they will be prompted with a warning. This will ask the user if they are sure they want to delete the item, and make them choose between Okay or Cancel. This will help to prevent the user from deleting an item by accident.
+
+![Delete Warning](/media/readme/deletewarning.png)
+
+- Admin -
+There is a main admin page that can be used to directly access Database items and Users. Only anyone with Admin credentials can access, and will be made to sign in. Once in they can view each of the Database tables and the items within it. As well as this they can edit, delete and add new items to Database. Also they can view Users who registered to the site for access, and again remove user who are no longer required to have access.
+
+![Admin Signin](/media/readme/AdminSignin.png)
+![Admin MainPage](/media/readme/Adminmain.png)
 
 ## Future Features
 
@@ -120,8 +184,11 @@ As shown in the GitHub Project, there are 2 items that were not implemented due 
 
 # Testing
 
-- Manual
-- Automated
+Features and functionality of the site were tested by using Manual and Automated tests.
+
+- Manual Testing - All CRUD functionality was testing to ensure it complete as expected. This required Creating, Editing and Deleting Data from each one of the models that was created. When entering data, false entries were made to check that only correct inputs would be allowed, and a prompt would be displayed to let the user know. Pages were checked to ensure they loaded as should, in correct order. Buttons, working as they should, loading correct page, or performing the correct function. Messages, show what has been actioned and with the correct message. 
+
+- Automated - 
  <!-- Image of coverage report -->
 
 # Bugs
@@ -136,11 +203,51 @@ Several issues arose during the course of this project, causing bugs and errors 
 
 # Deployment
 
+Quedgeley Carpets Cuts is deployed to Heroku, using an ElephantSQL Postgres database.
+To duplicate deployment to Heroku, follow these steps:
+
+- Fork or clone this repository in GitHub.
+- You will need a Cloudinary account to host user images and static files.
+- Login to Cloudinary.
+- Select the 'dashboard' option.
+- Copy the value of the 'API Environment variable' from the part starting `cloudinary://` to the end. You may need to select the eye icon to view the full environment variable. Paste this value somewhere for safe keeping as you will need it shortly (but destroy after deployment).
+- Log in to Heroku.
+- Select 'Create new app' from the 'New' menu at the top right.
+- Enter a name for the app and select the appropriate region.
+- Select 'Create app'.
+- Select 'Settings' from the menu at the top.
+- Login to ElephantSQL.
+- Click 'Create new instance' on the dashboard.
+- Name the 'plan' and select the 'Tiny Turtle (free)' plan.
+- Select 'select region'.
+- Choose the nearest data centre to your location.
+- Click 'Review'.
+- Go to the ElephantSQL dashboard and click on the 'database instance name' for this project.
+- Copy the ElephantSQL database URL to your clipboard (this starts with `postgres://`).
+- Return to the Heroku dashboard.
+- Select the 'settings' tab.
+- Locate the 'reveal config vars' link and select.
+- Enter the following config var names and values:
+    - `CLOUDINARY_URL`: *your cloudinary URL as obtained above*
+    - `DATABASE_URL`: *your ElephantSQL postgres database URL as obtained above*
+    - `PORT`: `8000`
+    - `SECRET_KEY`: *your secret key*
+- Select the 'Deploy' tab at the top.
+- Select 'GitHub' and confirm you wish to deploy using GitHub. You may be asked to enter your GitHub password.
+- Find the 'Connect to GitHub' section and use the search box to locate your repo.
+- Select 'Connect' when found.
+- Optionally choose the main branch under 'Automatic Deploys' and select 'Enable Automatic Deploys' if you wish your deployed site to be automatically redeployed every time you push changes to GitHub.
+- Find the 'Manual Deploy' section, choose 'main' as the branch to deploy and select 'Deploy Branch'.
+- Your site will shortly be deployed and you will be given a link to the deployed site when the process is complete.
 
 # Credits
 
-Hello-Django
-Django-Blog
+We would to acknowledge the following for inspiration, guidance and resources;
 
-Slack
-Andy
+- Code Institutes - Django-Blog, for Django implementation, and deployment with Heroku. As well as set-up with additional frameworks/libraries such as Cloudinary and Allauth.
+
+- Code Institutes - Hello-Django, for function based views, saving and updating forms and toggle function.
+
+- Stackoverflow - used for troubleshooting ideas and problems with code, especially with the Roll Balance calculator, how to work with queryset's and using the correct function with it.
+
+- Andy Guttridge - for his overall help and guidance with issues that were posted within the Slack app. Everytime, I could count on Andy to come up with an idea/guide to help come with a solution with any issue that was encountered.

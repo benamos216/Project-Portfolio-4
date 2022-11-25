@@ -23,11 +23,20 @@
                             <br>
                             <span class="roll-text">Warehouse Location: {{ rolls.location }}</span>
                             <br>
+                            {% if rolls.roll_balance is null %}
+                            <!-- If no cuts have been allocated, will return roll size until a cut has been allocated -->
+                            <span class="roll-text">Roll Balance left after cuts: {{ rolls.roll_size }}m left </span>
+                            <!-- Updates Roll Balance by taking Roll size and taking away sum of cut sizes -->
+                            <a class="cut" href="/calc/{{ rolls.id }}">
+                                Roll Balance
+                            </a>
+                            {% else %}
                             <span class="roll-text">Roll Balance left after cuts: {{ rolls.roll_balance }}m left </span>
                             <!-- Updates Roll Balance by taking Roll size and taking away sum of cut sizes -->
                             <a class="cut" href="/calc/{{ rolls.id }}">
                                 Roll Balance
                             </a>
+                            {% endif %}
                         </div>
                         <div>
                             <!-- Delete and Edit buttons, delete displays a warning -->

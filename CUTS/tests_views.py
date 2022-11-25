@@ -15,7 +15,9 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'supplier.html')
 
     def test_add_supplier(self):
-        response = self.client.post('/add_supplier', {'supplier': 'Test Supplier'})
+        response = self.client.post(
+            '/add_supplier',
+            {'supplier': 'Test Supplier'})
         self.assertRedirects(response, '/')
 
     def test_SupplierForm_context(self):
@@ -66,7 +68,12 @@ class TestViews(TestCase):
     def test_edit_rolls(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
         ranges = Range.objects.create(supplier=supplier, ranges='Test Range')
-        rolls = Roll.objects.create(ranges=ranges, rolls='Test Roll', roll_width='4m', roll_size='25', location='A1')
+        rolls = Roll.objects.create(
+            ranges=ranges,
+            rolls='Test Roll',
+            roll_width='4m',
+            roll_size='25',
+            location='A1')
         response = self.client.get(f'/edit_roll/{rolls.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'edit_roll.html')
@@ -74,7 +81,12 @@ class TestViews(TestCase):
     def test_delete_rolls(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
         ranges = Range.objects.create(supplier=supplier, ranges='Test Range')
-        rolls = Roll.objects.create(ranges=ranges, rolls='Test Roll', roll_width='4m', roll_size='25', location='A1')
+        rolls = Roll.objects.create(
+            ranges=ranges,
+            rolls='Test Roll',
+            roll_width='4m',
+            roll_size='25',
+            location='A1')
         response = self.client.get(f'/delete_roll/{rolls.id}')
         self.assertRedirects(response, '/')
         existing_items = Roll.objects.filter(id=rolls.id)
@@ -83,7 +95,12 @@ class TestViews(TestCase):
     def test_get_cuts(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
         ranges = Range.objects.create(supplier=supplier, ranges='Test Range')
-        rolls = Roll.objects.create(ranges=ranges, rolls='Test Roll', roll_width='4m', roll_size='25', location='A1')
+        rolls = Roll.objects.create(
+            ranges=ranges,
+            rolls='Test Roll',
+            roll_width='4m',
+            roll_size='25',
+            location='A1')
         response = self.client.get(f'/getcuts/{rolls.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'cut.html')
@@ -91,8 +108,16 @@ class TestViews(TestCase):
     def test_edit_cut(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
         ranges = Range.objects.create(supplier=supplier, ranges='Test Range')
-        rolls = Roll.objects.create(ranges=ranges, rolls='Test Roll', roll_width='4m', roll_size='25', location='A1')
-        cuts = Cut.objects.create(rolls=rolls, invoice='Test Invoice', cut_size='5')
+        rolls = Roll.objects.create(
+            ranges=ranges,
+            rolls='Test Roll',
+            roll_width='4m',
+            roll_size='25',
+            location='A1')
+        cuts = Cut.objects.create(
+            rolls=rolls,
+            invoice='Test Invoice',
+            cut_size='5')
         response = self.client.get(f'/edit_cut/{cuts.id}')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'edit_cut.html')
@@ -100,8 +125,16 @@ class TestViews(TestCase):
     def test_delete_cut(self):
         supplier = Supplier.objects.create(supplier='Test Supplier')
         ranges = Range.objects.create(supplier=supplier, ranges='Test Range')
-        rolls = Roll.objects.create(ranges=ranges, rolls='Test Roll', roll_width='4m', roll_size='25', location='A1')
-        cuts = Cut.objects.create(rolls=rolls, invoice='Test Invoice', cut_size='5')
+        rolls = Roll.objects.create(
+            ranges=ranges,
+            rolls='Test Roll',
+            roll_width='4m',
+            roll_size='25',
+            location='A1')
+        cuts = Cut.objects.create(
+            rolls=rolls,
+            invoice='Test Invoice',
+            cut_size='5')
         response = self.client.get(f'/delete_cut/{cuts.id}')
         self.assertRedirects(response, '/')
         existing_items = Cut.objects.filter(id=cuts.id)
