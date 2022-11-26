@@ -188,7 +188,7 @@ Features and functionality of the site were tested by using Manual and Automated
 
 - Manual Testing - All CRUD functionality was testing to ensure it complete as expected. This required Creating, Editing and Deleting Data from each one of the models that was created. When entering data, false entries were made to check that only correct inputs would be allowed, and a prompt would be displayed to let the user know. Pages were checked to ensure they loaded as should, in correct order. Buttons, working as they should, loading correct page, or performing the correct function. Messages, show what has been actioned and with the correct message. 
 
-- Automated - 
+- Automated - Django's built in Unit Testing was used to perform automated testing.
  <!-- Image of coverage report -->
 
 # Bugs

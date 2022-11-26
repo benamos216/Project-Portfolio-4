@@ -139,3 +139,34 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/')
         existing_items = Cut.objects.filter(id=cuts.id)
         self.assertEqual(len(existing_items), 0)
+
+    def test_SupplierForm_get(self):
+        response = self.client.get("/add_supplier")
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, "Add Supplier", html=True)
+
+    def test_valid_SupplierForm(self):
+        supplier = Supplier.objects.create(supplier='Test Supplier')
+        data = {'supplier': supplier.supplier}
+        form = SupplierForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_SupplierForm(self):
+        supplier = Supplier.objects.create(supplier='Test')
+        data = {'suppler': supplier.supplier}
+        form = SupplierForm(data=data)
+        self.assertFalse(form.is_valid())
+
+    def test_valid_RangeForm(self):
+        supplier = Supplier.objects.create(supplier='Test Supplier')
+        range = Range.objects.create(supplier=supplier, ranges='Test Range')
+        data = {'supplier': range.supplier, 'ranges': range.ranges, }
+        form = RangeForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_form(self):
+        supplier = Supplier.objects.create(supplier='Test Supplier')
+        range = Range.objects.create(supplier=supplier, ranges='')
+        data = {'supplier': range.supplier, 'ranges': range.ranges, }
+        form = RangeForm(data=data)
+        self.assertFalse(form.is_valid())
