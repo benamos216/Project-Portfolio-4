@@ -188,8 +188,12 @@ Features and functionality of the site were tested by using Manual and Automated
 
 - Manual Testing - All CRUD functionality was testing to ensure it complete as expected. This required Creating, Editing and Deleting Data from each one of the models that was created. When entering data, false entries were made to check that only correct inputs would be allowed, and a prompt would be displayed to let the user know. Pages were checked to ensure they loaded as should, in correct order. Buttons, working as they should, loading correct page, or performing the correct function. Messages, show what has been actioned and with the correct message. 
 
-- Automated - Django's built in Unit Testing was used to perform automated testing.
- <!-- Image of coverage report -->
+- Automated - Django's built in Unit Testing was used to perform automated testing. Testing was done our models and views to ensure they worked correctly. At this current time coverage provides 82% overall testing on the code, with 100% for our Models and 65% on Views. Due to time constraints, we were not able to continue performing Unit Testing on Form validation, Toggle Cut and Calc Function, however these were extensively tested manually to ensure if performed as expected. Also, time permitting we would've used Pytest instead, however it wasn't brought to our attention in time for us to convert over and continue testing.
+
+![Coverage Report](/media/readme/coverage.png)
+![Coverage Models](/media/readme/coverage2.png)
+![Coverage Views 1](/media/readme/coverage3.png)
+![Coverage Views 2](/media/readme/coverage4.png)
 
 # Bugs
 
