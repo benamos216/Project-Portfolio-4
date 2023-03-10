@@ -258,3 +258,7 @@ We would to acknowledge the following for inspiration, guidance and resources;
 - Stackoverflow - used for troubleshooting ideas and problems with code, especially with the Roll Balance calculator, how to work with queryset's and using the correct function with it.
 
 - Andy Guttridge - for his overall help and guidance with issues that were posted within the Slack app. Everytime, I could count on Andy to come up with an idea/guide to help come with a solution with any issue that was encountered.
+
+# Changes
+
+@Login_required Decorator added to views to give added security to the site. Means only signed in users can access the whole site, whereas someone not signed in will only have the home page to go to.

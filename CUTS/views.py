@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from .models import Supplier, Range, Roll, Cut
 from .forms import SupplierForm, RangeForm, RollForm, CutForm
@@ -6,7 +7,6 @@ from django.contrib import messages
 
 
 # Create your views here.
-
 
 def get_supplier(request):
     """
@@ -19,6 +19,7 @@ def get_supplier(request):
     return render(request, "supplier.html", context)
 
 
+@login_required
 def add_supplier(request):
     """
     Adds new supplier
@@ -36,6 +37,7 @@ def add_supplier(request):
     return render(request, "add_supplier.html", context)
 
 
+@login_required
 def edit_supplier(request, supplier_id):
     """
     Edit's existing suppliers and updates database with any changes
@@ -54,6 +56,7 @@ def edit_supplier(request, supplier_id):
     return render(request, 'edit_supplier.html', context)
 
 
+@login_required
 def delete_supplier(request, supplier_id):
     """
     Delete's selected supplier
@@ -64,6 +67,7 @@ def delete_supplier(request, supplier_id):
     return redirect('get_supplier')
 
 
+@login_required
 def get_ranges(request, supplier_id):
     """
     Returns relevant Ranges linked to the Supplier Id that is selected
@@ -76,6 +80,7 @@ def get_ranges(request, supplier_id):
     return render(request, "ranges.html", context)
 
 
+@login_required
 def add_range(request):
     """
     Creates new Range within Supplier
@@ -93,6 +98,7 @@ def add_range(request):
     return render(request, "add_range.html", context)
 
 
+@login_required
 def edit_range(request, range_id):
     """
     Edits existing Range, and updates database
@@ -111,6 +117,7 @@ def edit_range(request, range_id):
     return render(request, 'edit_range.html', context)
 
 
+@login_required
 def delete_range(request, range_id):
     """
     Deletes Range from Database, and subsequent data linked with it
@@ -121,6 +128,7 @@ def delete_range(request, range_id):
     return redirect('get_supplier')
 
 
+@login_required
 def get_rolls(request, range_id):
     """
     Returns all Rolls linked with the selected Range Id in the database
@@ -133,6 +141,7 @@ def get_rolls(request, range_id):
     return render(request, "rolls.html", context)
 
 
+@login_required
 def addroll(request):
     """
     Adds Roll to Database
@@ -150,6 +159,7 @@ def addroll(request):
     return render(request, "add_roll.html", context)
 
 
+@login_required
 def edit_roll(request, roll_id):
     """
     Edits existing Roll, and updates the database
@@ -168,6 +178,7 @@ def edit_roll(request, roll_id):
     return render(request, 'edit_roll.html', context)
 
 
+@login_required
 def delete_roll(request, roll_id):
     """
     Deletes selected Roll, and any linked data with it from the database
@@ -178,6 +189,7 @@ def delete_roll(request, roll_id):
     return redirect('get_supplier')
 
 
+@login_required
 def getcuts(request, roll_id):
     """
     Returns cuts from the database linked to the Roll Id
@@ -190,6 +202,7 @@ def getcuts(request, roll_id):
     return render(request, 'cut.html', context)
 
 
+@login_required
 def addcut(request):
     """
     Adds cut to the database
@@ -207,6 +220,7 @@ def addcut(request):
     return render(request, "add_cut.html", context)
 
 
+@login_required
 def edit_cut(request, cut_id):
     """
     Edits existing cut, and updates the database
@@ -225,6 +239,7 @@ def edit_cut(request, cut_id):
     return render(request, 'edit_cut.html', context)
 
 
+@login_required
 def delete_cut(request, cut_id):
     """
     Deletes selected cut from the database
@@ -235,6 +250,7 @@ def delete_cut(request, cut_id):
     return redirect('get_supplier')
 
 
+@login_required
 def toggle_cut(request, cut_id):
     """
     When button is clicked, updates database that the cut has been made,
@@ -248,6 +264,7 @@ def toggle_cut(request, cut_id):
     return redirect(reverse('get_supplier'))
 
 
+@login_required
 def calc(request, roll_id):
     """
     Works out the remaining Roll Balance, taking the roll size
